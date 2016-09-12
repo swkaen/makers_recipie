@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, Response
 import json
+import db_connection
 app = Flask(__name__)
 
 @app.route('/')
 def server_rendering():
     return render_template('index.html')
+
 
 @app.route('/api/test', methods=['POST'])
 def submit_article():
@@ -12,6 +14,7 @@ def submit_article():
     data=request.form.to_dict()
     json_data.append(data)
     print('author: '+ data['author'] +' '+ 'message: '+data['message'])
+
     return Response(
         json.dumps(json_data),
         mimetype='application/json',
