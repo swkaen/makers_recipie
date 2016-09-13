@@ -96,10 +96,10 @@
 	            { path: '/repos', component: _Repos2.default },
 	            _react2.default.createElement(_reactRouter.Route, { path: '/repos/:userName/:repoName', component: _Repo2.default })
 	        ),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default })
-	    )
+	        _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default })
+	    ),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default })
 	), document.getElementById('app'));
 
 /***/ },
@@ -19844,15 +19844,6 @@
 	                    'li',
 	                    null,
 	                    _react2.default.createElement(
-	                        _reactRouter.IndexLink,
-	                        { to: '/', activeClassName: 'active' },
-	                        'Home'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
 	                        _NavLink2.default,
 	                        { to: '/about', activeClassName: 'active' },
 	                        'About'
@@ -19890,6 +19881,7 @@
 	        );
 	    }
 	});
+	//<li><IndexLink to="/" activeClassName="active">Login</IndexLink></li>
 
 /***/ },
 /* 160 */

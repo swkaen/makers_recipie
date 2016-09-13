@@ -1,6 +1,10 @@
-from flask import Flask, render_template, request, Response
 import json
-import db_connection
+
+from flask import Flask, render_template, request, Response
+from pymodules import db_connection
+from pymodules.security_util import generate_hash, eval_hash
+
+
 app = Flask(__name__)
 
 DB_NAME='mk_recipie.sqlite3'
@@ -33,7 +37,8 @@ def register_user():
     json_data=[]
     data=request.form.to_dict()
     json_data.append(data)
-    sql_data=(data['user_name'], data['email'], data['password'])
+    hash_pass = generate_hash(data['password'])
+    sql_data=(data['user_name'], data['email'], hash_pass)
     DB.save_user(sql_data)
 
     return Response(
@@ -45,5 +50,22 @@ def register_user():
         }
     )
 
+@app.route('/api/login', methods=['POST'])
+def user_login():
+    json_data=[]
+    data=request.form.to_dict()
+    json_data.append(data)
+    hash_pass = generate_hash(data['password'])
+    sql_data=(data['user_name'], data['email'], hash_pass)
+    DB.save_user(sql_data)
+
+    return Response(
+        json.dumps(json_data),
+        mimetype='application/json',
+        headers={
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Origin': '*'
+        }
+    )
 if __name__=='__main__':
     app.run(host='0.0.0.0', debug=True)
