@@ -76,6 +76,10 @@
 
 	var _Form2 = _interopRequireDefault(_Form);
 
+	var _Register = __webpack_require__(230);
+
+	var _Register2 = _interopRequireDefault(_Register);
+
 	var _reactRouter = __webpack_require__(161);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -93,7 +97,8 @@
 	            _react2.default.createElement(_reactRouter.Route, { path: '/repos/:userName/:repoName', component: _Repo2.default })
 	        ),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default })
 	    )
 	), document.getElementById('app'));
 
@@ -19870,6 +19875,15 @@
 	                        { to: '/form', activeClassName: 'active' },
 	                        'Form'
 	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    _react2.default.createElement(
+	                        _NavLink2.default,
+	                        { to: '/register', activeClassName: 'active' },
+	                        'Register'
+	                    )
 	                )
 	            ),
 	            this.props.children
@@ -35860,17 +35874,103 @@
 	            'form',
 	            { className: 'messageForm', onSubmit: this.handleSubmit },
 	            _react2.default.createElement('input', { type: 'text',
-	                placeholder: 'Yout name',
+	                placeholder: 'Your name',
+	                maxLength: '10',
 	                value: this.state.author,
 	                onChange: this.handleAuthorChange }),
-	            _react2.default.createElement('input', { type: 'text',
-	                placeholder: 'Any message',
-	                name: 'message',
-	                size: '50',
-	                maxLength: '140',
+	            _react2.default.createElement('input', { type: 'email',
+	                placeholder: 'xxxxx@example.com',
+	                name: 'email',
 	                value: this.state.message,
 	                onChange: this.handleMessageChange }),
 	            _react2.default.createElement('input', { type: 'submit', value: 'send' })
+	        );
+	    }
+	});
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _jquery = __webpack_require__(224);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Created by swkaen on 西暦16/09/12.
+	 */
+	exports.default = _react2.default.createClass({
+	    displayName: 'Register',
+	    getInitialState: function getInitialState() {
+	        return { user_name: '', email: '', password: '' };
+	    },
+	    handleUser_nameChange: function handleUser_nameChange(e) {
+	        this.setState({ user_name: e.target.value });
+	    },
+	    handleEmailChange: function handleEmailChange(e) {
+	        this.setState({ email: e.target.value });
+	    },
+	    handlePasswordChange: function handlePasswordChange(e) {
+	        this.setState({ password: e.target.value });
+	    },
+	    handleSubmit: function handleSubmit(e) {
+	        e.preventDefault();
+	        var email = this.state.email.trim();
+	        var user_name = this.state.user_name.trim();
+	        var password = this.state.password.trim();
+
+	        if (!email || !user_name || !password) {
+	            return;
+	        }
+	        var data = { user_name: user_name, email: email, password: password };
+
+	        _jquery2.default.ajax({
+	            url: 'http://localhost:5000/api/register',
+	            dataType: 'json',
+	            type: 'POST',
+	            data: data,
+	            success: function () {
+	                console.log('success');
+	            }.bind(this),
+	            error: function (xhr, status, err) {
+	                this.setState({ user_name: user_name, email: email, password: password });
+	                console.error(status, err.toString());
+	            }.bind(this)
+	        });
+	        this.setState({ user_name: '', email: '', password: '' });
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'form',
+	            { className: 'emailForm', onSubmit: this.handleSubmit },
+	            _react2.default.createElement('input', { type: 'text',
+	                placeholder: 'Your name',
+	                maxLength: '10',
+	                value: this.state.user_name,
+	                onChange: this.handleUser_nameChange }),
+	            _react2.default.createElement('input', { type: 'email',
+	                placeholder: 'xxxxx@example.com',
+	                name: 'email',
+	                value: this.state.email,
+	                onChange: this.handleEmailChange }),
+	            _react2.default.createElement('input', { type: 'password',
+	                placeholder: 'password',
+	                name: 'password',
+	                value: this.state.password,
+	                onChange: this.handlePasswordChange }),
+	            _react2.default.createElement('input', { type: 'submit', value: 'register' })
 	        );
 	    }
 	});

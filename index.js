@@ -6,6 +6,7 @@ import Repo from './modules/Repo'
 import Repos from './modules/Repos'
 import Home from './modules/Home'
 import Form from './modules/Form'
+import Register from './modules/Register'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 
 render((
@@ -17,6 +18,7 @@ render((
             </Route>
             <Route path="/about" component={About}/>
             <Route path="/form" component={Form}/>
+            <Route path="/register" component={Register}/>
         </Route>
     </Router>
 ), document.getElementById('app'));

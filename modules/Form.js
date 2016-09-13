@@ -43,15 +43,14 @@ export default React.createClass({
         return(
             <form className="messageForm" onSubmit={this.handleSubmit}>
                 <input type="text"
-                       placeholder="Yout name"
+                       placeholder="Your name"
+                       maxLength='10'
                        value={this.state.author}
                        onChange={this.handleAuthorChange}/>
 
-                <input type="text"
-                       placeholder="Any message"
-                       name="message"
-                       size="50"
-                       maxLength="140"
+                <input type="email"
+                       placeholder="xxxxx@example.com"
+                       name="email"
                        value={this.state.message}
                        onChange={this.handleMessageChange}/>
                 <input type="submit" value="send"/>
