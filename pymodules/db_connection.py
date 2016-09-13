@@ -50,10 +50,8 @@ class DBConnection():
         sql = 'SELECT password from user where user_name = (?)'
         a = cur.execute(sql, user_name)
         for i in a:
-            print(i[0])
+            return i[0]
         self.close_connection(conn)
-
-
 
     def save_message(self):
         pass
@@ -61,5 +59,6 @@ class DBConnection():
 if __name__=="__main__":
     user_name=('tisotiso', )
     DBConn = DBConnection('mk_recipie.sqlite3')
-    DBConn.get_user_password(user_name)
+    a = DBConn.get_user_password(user_name)
+    print(a)
 

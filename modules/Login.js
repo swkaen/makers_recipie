@@ -2,9 +2,13 @@
  * Created by swkaen on 西暦16/09/13.
  */
 import React from 'react'
+import $ from 'jquery'
+import { browserHistory } from 'react-router';
 
 export default React.createClass({
-
+    contextTypes: {
+    router: React.PropTypes.object.isRequired
+    },
     getInitialState(){
       return {user_name:'', password:''}
     },
@@ -29,8 +33,12 @@ export default React.createClass({
             dataType:'json',
             type:'POST',
             data:data,
-            success:function () {
-                console.log('success');
+            success:function (data) {
+                var login_status = data[0]['login_status'];
+                if(login_status === true){
+                    this.setState({user_name:'', password:''});
+                    this.context.router.push('/dashboard');
+                }
             }.bind(this),
             error:function(xhr, status, err) {
                 this.setState({user_name: user_name, password:password});

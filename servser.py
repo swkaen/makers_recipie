@@ -54,10 +54,11 @@ def register_user():
 def user_login():
     json_data=[]
     data=request.form.to_dict()
-    json_data.append(data)
+    user_name = (data['user_name'], )
     hash_pass = generate_hash(data['password'])
-    sql_data=(data['user_name'], data['email'], hash_pass)
-    DB.save_user(sql_data)
+    db_saved_hash_pass = DB.get_user_password(user_name)
+    login_status = eval_hash(hash_pass, db_saved_hash_pass)
+    json_data.append({'login_status':login_status})
 
     return Response(
         json.dumps(json_data),

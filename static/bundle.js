@@ -68,10 +68,6 @@
 
 	var _Repos2 = _interopRequireDefault(_Repos);
 
-	var _Home = __webpack_require__(225);
-
-	var _Home2 = _interopRequireDefault(_Home);
-
 	var _Form = __webpack_require__(229);
 
 	var _Form2 = _interopRequireDefault(_Form);
@@ -80,6 +76,10 @@
 
 	var _Register2 = _interopRequireDefault(_Register);
 
+	var _Login = __webpack_require__(231);
+
+	var _Login2 = _interopRequireDefault(_Login);
+
 	var _reactRouter = __webpack_require__(161);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -87,19 +87,20 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.hashHistory },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Login2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
 	    _react2.default.createElement(
 	        _reactRouter.Route,
-	        { path: '/', component: _App2.default },
-	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	        { path: '/dashboard', component: _App2.default },
 	        _react2.default.createElement(
 	            _reactRouter.Route,
 	            { path: '/repos', component: _Repos2.default },
 	            _react2.default.createElement(_reactRouter.Route, { path: '/repos/:userName/:repoName', component: _Repo2.default })
 	        ),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default })
-	    ),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default })
+	    )
 	), document.getElementById('app'));
 
 /***/ },
@@ -19875,13 +19876,21 @@
 	                        { to: '/register', activeClassName: 'active' },
 	                        'Register'
 	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    _react2.default.createElement(
+	                        _NavLink2.default,
+	                        { to: '/' },
+	                        'Logout'
+	                    )
 	                )
 	            ),
 	            this.props.children
 	        );
 	    }
 	});
-	//<li><IndexLink to="/" activeClassName="active">Login</IndexLink></li>
 
 /***/ },
 /* 160 */
@@ -35966,6 +35975,101 @@
 	        );
 	    }
 	});
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _jquery = __webpack_require__(224);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _reactRouter = __webpack_require__(161);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	    displayName: 'Login',
+
+	    contextTypes: {
+	        router: _react2.default.PropTypes.object.isRequired
+	    },
+	    getInitialState: function getInitialState() {
+	        return { user_name: '', password: '' };
+	    },
+	    handleUser_nameChange: function handleUser_nameChange(e) {
+	        this.setState({ user_name: e.target.value });
+	    },
+	    handlePasswordChange: function handlePasswordChange(e) {
+	        this.setState({ password: e.target.value });
+	    },
+	    handleSubmit: function handleSubmit(e) {
+	        e.preventDefault();
+	        var user_name = this.state.user_name.trim();
+	        var password = this.state.password.trim();
+
+	        if (!user_name || !password) {
+	            return;
+	        }
+	        var data = { user_name: user_name, password: password };
+
+	        _jquery2.default.ajax({
+	            url: 'http://localhost:5000/api/login',
+	            dataType: 'json',
+	            type: 'POST',
+	            data: data,
+	            success: function (data) {
+	                var login_status = data[0]['login_status'];
+	                if (login_status === true) {
+	                    this.setState({ user_name: '', password: '' });
+	                    this.context.router.push('/dashboard');
+	                }
+	            }.bind(this),
+	            error: function (xhr, status, err) {
+	                this.setState({ user_name: user_name, password: password });
+	                console.error(status, err.toString());
+	            }.bind(this)
+	        });
+	        this.setState({ user_name: '', password: '' });
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'form',
+	            { className: 'emailForm', onSubmit: this.handleSubmit },
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement('input', { type: 'text',
+	                    placeholder: 'Your name',
+	                    maxLength: '10',
+	                    value: this.state.user_name,
+	                    onChange: this.handleUser_nameChange })
+	            ),
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement('input', { type: 'password',
+	                    placeholder: 'password',
+	                    name: 'password',
+	                    value: this.state.password,
+	                    onChange: this.handlePasswordChange }),
+	                _react2.default.createElement('input', { type: 'submit', value: 'Login' })
+	            )
+	        );
+	    }
+	}); /**
+	     * Created by swkaen on 西暦16/09/13.
+	     */
 
 /***/ }
 /******/ ]);
