@@ -48,7 +48,7 @@ export default React.createClass({
             <form className="emailForm" onSubmit={this.handleSubmit}>
                 <input type="text"
                        placeholder="Your name"
-                       maxLength='10'
+                       maxLength='16'
                        value={this.state.user_name}
                        onChange={this.handleUser_nameChange}/>
 

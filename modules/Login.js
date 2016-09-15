@@ -35,8 +35,9 @@ export default React.createClass({
             data:data,
             success:function (data) {
                 var login_status = data[0]['login_status'];
+                console.log(login_status)
                 if(login_status === true){
-                    this.setState({user_name:'', password:''});
+                    //this.setState({user_name:'', password:''});
                     this.context.router.push('/dashboard');
                 }
             }.bind(this),
@@ -52,7 +53,7 @@ export default React.createClass({
                 <p>
                     <input type="text"
                        placeholder="Your name"
-                       maxLength='10'
+                       maxLength='16'
                        value={this.state.user_name}
                        onChange={this.handleUser_nameChange}/>
                 </p>

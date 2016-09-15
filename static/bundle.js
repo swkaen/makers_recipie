@@ -80,6 +80,14 @@
 
 	var _Login2 = _interopRequireDefault(_Login);
 
+	var _Top = __webpack_require__(232);
+
+	var _Top2 = _interopRequireDefault(_Top);
+
+	var _SignUporIn = __webpack_require__(233);
+
+	var _SignUporIn2 = _interopRequireDefault(_SignUporIn);
+
 	var _reactRouter = __webpack_require__(161);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -87,8 +95,13 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.hashHistory },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Login2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
+	    _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: '/', component: _Top2.default },
+	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _SignUporIn2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default })
+	    ),
 	    _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: '/dashboard', component: _App2.default },
@@ -98,8 +111,7 @@
 	            _react2.default.createElement(_reactRouter.Route, { path: '/repos/:userName/:repoName', component: _Repo2.default })
 	        ),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/about', component: _About2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/form', component: _Form2.default })
 	    )
 	), document.getElementById('app'));
 
@@ -35696,20 +35708,39 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _NavLink = __webpack_require__(160);
+
+	var _NavLink2 = _interopRequireDefault(_NavLink);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	/**
+	 * Created by swkaen on 西暦16/09/08.
+	 */
 	exports.default = _react2.default.createClass({
 	    displayName: 'About',
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
 	            null,
-	            'About'
+	            _react2.default.createElement(
+	                'h1',
+	                null,
+	                'Welcome to Maker\'s recipe!'
+	            ),
+	            _react2.default.createElement(
+	                'button',
+	                { type: 'button' },
+	                'Register'
+	            ),
+	            _react2.default.createElement(
+	                'button',
+	                { type: 'button' },
+	                'Login'
+	            )
 	        );
 	    }
-	}); /**
-	     * Created by swkaen on 西暦16/09/08.
-	     */
+	});
 
 /***/ },
 /* 227 */
@@ -35958,7 +35989,7 @@
 	            { className: 'emailForm', onSubmit: this.handleSubmit },
 	            _react2.default.createElement('input', { type: 'text',
 	                placeholder: 'Your name',
-	                maxLength: '10',
+	                maxLength: '16',
 	                value: this.state.user_name,
 	                onChange: this.handleUser_nameChange }),
 	            _react2.default.createElement('input', { type: 'email',
@@ -36030,8 +36061,9 @@
 	            data: data,
 	            success: function (data) {
 	                var login_status = data[0]['login_status'];
+	                console.log(login_status);
 	                if (login_status === true) {
-	                    this.setState({ user_name: '', password: '' });
+	                    //this.setState({user_name:'', password:''});
 	                    this.context.router.push('/dashboard');
 	                }
 	            }.bind(this),
@@ -36051,7 +36083,7 @@
 	                null,
 	                _react2.default.createElement('input', { type: 'text',
 	                    placeholder: 'Your name',
-	                    maxLength: '10',
+	                    maxLength: '16',
 	                    value: this.state.user_name,
 	                    onChange: this.handleUser_nameChange })
 	            ),
@@ -36070,6 +36102,93 @@
 	}); /**
 	     * Created by swkaen on 西暦16/09/13.
 	     */
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	    displayName: 'Top',
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	                'h1',
+	                null,
+	                'Welcome to Maker\'s recipe!'
+	            ),
+	            this.props.children
+	        );
+	    }
+	}); /**
+	     * Created by swkaen on 西暦16/09/15.
+	     */
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(161);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Created by swkaen on 西暦16/09/15.
+	 */
+	exports.default = _react2.default.createClass({
+	    displayName: 'SignUporIn',
+
+	    contextTypes: {
+	        router: _react2.default.PropTypes.object
+	    },
+	    onClickRegisterButton: function onClickRegisterButton() {
+	        var path = '/register';
+	        this.context.router.push(path);
+	    },
+	    onClickLoginButton: function onClickLoginButton() {
+	        var path = '/login';
+	        this.context.router.push(path);
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	                'button',
+	                { type: 'button', onClick: this.onClickRegisterButton },
+	                'Register'
+	            ),
+	            _react2.default.createElement(
+	                'button',
+	                { type: 'button', onClick: this.onClickLoginButton },
+	                'Login'
+	            )
+	        );
+	    }
+	});
 
 /***/ }
 /******/ ]);
