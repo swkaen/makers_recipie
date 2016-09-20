@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import $ from 'jquery'
+import styles from '../styles/form.css';
 export default React.createClass({
 
     getInitialState(){
@@ -45,26 +46,27 @@ export default React.createClass({
     },
     render(){
         return(
-            <form className="emailForm" onSubmit={this.handleSubmit}>
-                <input type="text"
-                       placeholder="Your name"
+            <form className={styles.forms} onSubmit={this.handleSubmit}>
+                <input id={styles.nameBox}
+                       className={styles.inputBox} type="text"
+                       placeholder="ユーザーネーム"
                        maxLength='16'
                        value={this.state.user_name}
                        onChange={this.handleUser_nameChange}/>
-
-                <input type="email"
-                       placeholder="xxxxx@example.com"
+                <input id={styles.emailBox}
+                       className={styles.inputBox} type="email"
+                       placeholder="メールアドレス"
                        name="email"
                        value={this.state.email}
                        onChange={this.handleEmailChange}/>
-
-                <input type="password"
-                       placeholder="password"
+                <input id={styles.passwordBox}
+                       className={styles.inputBox} type="password"
+                       placeholder="パスワード"
                        name="password"
                        value={this.state.password}
                        onChange={this.handlePasswordChange}/>
 
-                <input type="submit" value="register"/>
+                <input id={styles.submitButton} type="submit" value="登録"/>
             </form>
         )
     }

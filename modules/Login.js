@@ -4,6 +4,7 @@
 import React from 'react'
 import $ from 'jquery'
 import { browserHistory } from 'react-router';
+import styles from '../styles/form.css';
 
 export default React.createClass({
     contextTypes: {
@@ -49,22 +50,23 @@ export default React.createClass({
         this.setState({user_name:'', password:''});
     },
     render(){
-        return (<form className="emailForm" onSubmit={this.handleSubmit}>
-                <p>
-                    <input type="text"
-                       placeholder="Your name"
+        return (
+            <form className={styles.forms} onSubmit={this.handleSubmit}>
+                    <input id={styles.nameBox}
+                           className={styles.inputBox}
+                           type="text"
+                       placeholder="ユーザーネーム"
                        maxLength='16'
                        value={this.state.user_name}
                        onChange={this.handleUser_nameChange}/>
-                </p>
-                <p>
-                    <input type="password"
-                       placeholder="password"
+                    <input id={styles.passwordBox}
+                           className={styles.inputBox}
+                           type="password"
+                       placeholder="パスワード"
                        name="password"
                        value={this.state.password}
                        onChange={this.handlePasswordChange}/>
-                    <input type="submit" value="Login"/>
-                </p>
+                    <input id={styles.submitButton} type="submit" value="ログイン"/>
             </form>
         )
     }

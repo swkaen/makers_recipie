@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import { browserHistory } from 'react-router'
+import styles from '../styles/signuporin.css'
 
 export default React.createClass({
     contextTypes: {
@@ -18,9 +19,9 @@ export default React.createClass({
     },
     render(){
         return(
-            <div>
-                <button type="button" onClick={this.onClickRegisterButton}>Register</button>
-                <button type="button" onClick={this.onClickLoginButton}>Login</button>
+            <div className={styles.topButtons}>
+                <button type="button" className={styles.defaultButton} id={styles.register} onClick={this.onClickRegisterButton}>利用開始</button>
+                <button type="button" className={styles.defaultButton} id={styles.login} onClick={this.onClickLoginButton}>ログイン</button>
             </div>
         )
     }
