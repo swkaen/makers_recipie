@@ -18,6 +18,7 @@ export default React.createClass({
     handlePasswordChange(e){
         this.setState({password:e.target.value});
     },
+    
     handleSubmit(e){
         e.preventDefault();
         var email = this.state.email.trim();

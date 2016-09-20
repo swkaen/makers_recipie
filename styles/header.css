@@ -1,0 +1,33 @@
+@import 'https://fonts.googleapis.com/css?family=Pacifico';
+
+.headers{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #7f7f7f;
+}
+
+.nav{
+    display: flex;
+    align-items: stretch;
+    list-style-type:none;
+}
+
+.nav li{
+    margin: 0 1em;
+    height: 100%;
+}
+#serviceName{
+    font-family: 'Pacifico', cursive;
+    margin: 1em;
+}
+
+#userIcon{
+    height: 100%;
+    width: 40px;
+    background-color: #56baf4;
+    background-image: url("../media/images/kaen_ra.png");
+    background-size: cover;
+}

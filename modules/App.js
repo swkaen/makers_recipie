@@ -1,6 +1,7 @@
 import React from 'react'
 import NavLink from './NavLink'
 import { IndexLink } from 'react-router'
+import Header from './Header'
 import $ from 'jquery'
 import Home from './Home'
 
@@ -9,7 +10,7 @@ export default React.createClass({
   render() {
     return(
         <div>
-            <h1>Maker's Recipe</h1>
+            <Header/>
             <ul role="nav">
                 <li><NavLink to ="/about" activeClassName="active">About</NavLink></li>
                 <li><NavLink to ="/repos" activeClassName="active">Repos</NavLink></li>
