@@ -9,24 +9,29 @@ import Register from './modules/Register'
 import Login from './modules/Login'
 import Top from './modules/Top'
 import SignUporIn from './modules/SignUporIn'
+import PostForm from './modules/PostForm'
+import DashBoard from './modules/DashBoard'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 
 render((
     <Router history={hashHistory}>
-        
+
+        {/*トップページ*/}
         <Route path="/" component={Top}>
             <IndexRoute component={SignUporIn}/>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register}/>
         </Route>
-       
-        <Route path="/dashboard" component={App}>
+
+        {/*メインページ*/}
+        <Route path="/app" component={App}>
+            <IndexRoute component={DashBoard}/>
             <Route path="/repos" component={Repos}>
                 <Route path="/repos/:userName/:repoName" component={Repo}/>
             </Route>
-            <Route path="/about" component={About}/>
-            <Route path="/form" component={Form}/>
-            
+            <Route path="/post" component={PostForm}/>
         </Route>
+
     </Router>
+
 ), document.getElementById('app'));

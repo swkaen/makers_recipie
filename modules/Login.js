@@ -36,10 +36,9 @@ export default React.createClass({
             data:data,
             success:function (data) {
                 var login_status = data[0]['login_status'];
-                console.log(login_status)
+                console.log(login_status);
                 if(login_status === true){
-                    //this.setState({user_name:'', password:''});
-                    this.context.router.push('/dashboard');
+                    this.context.router.push('/app');
                 }
             }.bind(this),
             error:function(xhr, status, err) {

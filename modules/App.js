@@ -10,13 +10,11 @@ export default React.createClass({
   render() {
     return(
         <div>
-            <Header/>
-            <ul role="nav">
-                <li><NavLink to ="/about" activeClassName="active">About</NavLink></li>
+            <Header imgref="../media/images/kaen_ra.png"/>
+            {/*<ul role="nav">
                 <li><NavLink to ="/repos" activeClassName="active">Repos</NavLink></li>
-                <li><NavLink to ="/form"  activeClassName="active">Form</NavLink></li>
-                <li><NavLink to ="/">Logout</NavLink></li>
-            </ul>
+                <li><NavLink to ="/post"  activeClassName="active">Post</NavLink></li>
+            </ul>*/}
             {this.props.children}
         </div>
     )
